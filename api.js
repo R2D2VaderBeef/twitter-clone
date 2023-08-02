@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, addNewUser, getUser, setUserBio } = require("./database.js");
+const { getAllUsers, addNewUser, getUser, setUserBio, saveNewPoop } = require("./database.js");
 const crypto = require('crypto'); 
 
 router.get('/user', (req, res) => {
@@ -71,12 +71,25 @@ router.get("/getProfile", (req, res) => {
 })
 
 router.post("/setBio", (req, res) => {
+    if (!req.session.loggedin) return res.end(401);
     let handle = req.session.handle;
     let newbio = req.body.newbio.slice(0, 200);
     newbio = newbio.replaceAll("<", "").replaceAll(">", "");
 
     setUserBio(handle, newbio).then(result => {
         res.send("success");
+    })
+})
+
+router.post("/newPoop", (req, res) => {
+    if (!req.session.loggedin) return res.end(401);
+    let handle = req.session.handle;
+    let poop = req.body.poop.slice(0, 300);;
+    poop = poop.replaceAll("<", "").replaceAll(">", "");
+    let timestamp = Date.now();
+
+    saveNewPoop(handle, poop, timestamp).then(result => {
+        res.send("success " + result[0]["LAST_INSERT_ID()"].toString());
     })
 })
 

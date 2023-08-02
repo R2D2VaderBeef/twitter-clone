@@ -77,6 +77,17 @@ app.get("/my-tissue", (req, res) => {
     else res.redirect("/login")
 })
 
+app.get("/poop", (req, res) => {
+    if (req.session.loggedin) {
+        res.sendFile(process.cwd() + "/public/poop.html");
+    }
+    else res.redirect("/login")
+})
+
+app.get("/poops", (req, res) => {
+    res.sendFile(process.cwd() + "/public/poopviewer.html");
+})
+
 app.use("/css", express.static(process.cwd() + "/public/css"));
 app.use("/fonts", express.static(process.cwd() + "/public/fonts"));
 app.use("/js", express.static(process.cwd() + "/public/js"));

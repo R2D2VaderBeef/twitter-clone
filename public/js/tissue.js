@@ -9,6 +9,7 @@ async function getProfile() {
     }
     else {
         document.getElementById("tissue-handle").textContent = data.handle;
+        document.title = "💩 " + data.handle + " | Buttwipe"
 
         if (data.bio) {
             document.getElementById("biobody").textContent = data.bio;
