@@ -50,6 +50,29 @@ app.get("/signup", (req, res) => {
     res.sendFile(process.cwd() + "/public/signup.html");
 })
 
+app.get("/login", (req, res) => {
+    if (req.session.loggedin) {
+        res.redirect("/")
+    }
+    else res.sendFile(process.cwd() + "/public/login.html");
+})
+
+app.get("/logout", (req, res) => {
+    if (req.session.loggedin) {
+        req.session.destroy(function() {
+            res.redirect("/");
+        })
+    }
+    else res.redirect("/");
+})
+
+app.get("/my-tissue", (req, res) => {
+    if (req.session.loggedin) {
+        res.redirect("/tissue?handle=" + req.session.handle);
+    }
+    else res.redirect("/login")
+})
+
 app.use("/css", express.static(process.cwd() + "/public/css"));
 app.use("/fonts", express.static(process.cwd() + "/public/fonts"));
 app.use("/js", express.static(process.cwd() + "/public/js"));

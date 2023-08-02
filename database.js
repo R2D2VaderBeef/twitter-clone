@@ -24,5 +24,17 @@ module.exports = {
                 }
               );
         })
+    },
+    getUser: (handle) => {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'SELECT * FROM users WHERE handle = ?;',
+                [handle],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else resolve(results);
+                }
+            );
+        });
     }
 }
