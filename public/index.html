@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>💩 Buttwipe</title>
 
-        <link href="./css/main.css" rel="stylesheet" />
-        <link href="./css/fonts.css" rel="stylesheet" />
+<head>
+    <title>💩 Buttwipe</title>
 
-        <script src="./js/main.js"></script>
+    <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/fonts.css" rel="stylesheet" />
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="sidebar">
-                <nav>
-                    <button class="active"><span class="icon">🏠</span>Home</button>
-                    <button><span class="icon">🚽</span>The Sewer</button>
-                    <button onclick="window.location.href='/signup'" id="createaccount" style="display: none;"><span class="icon">🤡</span>Sign Up</button>
-                    <button onclick="window.location.href='/login'" id="login" style="display: none;"><span class="icon">📥</span>Log In</button>
-                    <button id="tissue" style="display: none;"><span class="icon">🤧</span>Your Tissue</button>
-                    <button class="poopButton" id="poop" style="display: none;"><span class="icon">💩</span>Poop</button>
-                    <div class="account" id="account" style="display: none;">
-                        <p class="handle"></p>
-                        <button onclick="window.location.href='/logout'" id="logout"><span class="icon">📤</span>Log Out</button>
-                    </div>
-                </nav>
-            </div>
-            <div class="feed">
-                <h1>💩 Buttwipe</h1>
-                <p>A Twitter clone built in 12 hours for a challenge.</p>
-                <p>To help you get started, read this list of our features and which Twitter feature they correspond to.</p>
-                <ul>
-                    <li>🚽 The Sewer: Explore</li>
-                    <li>🤧 Tissue: Profile</li>
-                    <li>💩 Poop: Compose Tweet</li>
-                    <li>🧻 Wipe: Tweet</li>
-                    <li>🐽 Sniff: Like</li>
-                    <li>💨 Fart Back: Reply</li>
-                    <li>🔀 Re-wipe: Retweet</li>
-                </ul>
-            </div>
+    <script src="./js/main.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <nav>
+                <button class="active"><span class="icon">🏠</span>Home</button>
+                <button><span class="icon">🚽</span>The Sewer</button>
+                <button onclick="window.location.href='/signup'" id="createaccount" style="display: none;"><span
+                        class="icon">🤡</span>Sign Up</button>
+                <button onclick="window.location.href='/login'" id="login" style="display: none;"><span
+                        class="icon">📥</span>Log In</button>
+                <button onclick="window.location.href='/my-tissue'" id="tissue" style="display: none;"><span
+                        class="icon">🤧</span>Your Tissue</button>
+                <button class="poopButton" id="poop" style="display: none;"><span class="icon">💩</span>Poop</button>
+                <div class="account" id="account" style="display: none;">
+                    <p class="handle"></p>
+                    <button onclick="window.location.href='/logout'" id="logout"><span class="icon">📤</span>Log
+                        Out</button>
+                </div>
+            </nav>
         </div>
-    </body>
+        <div class="feed">
+            <h1>💩 Buttwipe</h1>
+            <p>A Twitter clone built in 12 hours for a challenge.</p>
+            <p>To help you get started, read this list of our features and which Twitter feature they correspond to.</p>
+            <ul>
+                <li>🚽 The Sewer: Explore</li>
+                <li>🤧 Tissue: Profile</li>
+                <li>💩 Poop: Compose Tweet</li>
+                <li>🧻 Wipe: Tweet</li>
+                <li>🐽 Sniff: Like</li>
+                <li>💨 Fart Back: Reply</li>
+                <li>🔀 Re-wipe: Retweet</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
 </html>

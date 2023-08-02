@@ -66,6 +66,10 @@ app.get("/logout", (req, res) => {
     else res.redirect("/");
 })
 
+app.get("/tissue", (req, res) => {
+    res.sendFile(process.cwd() + "/public/tissue.html");
+})
+
 app.get("/my-tissue", (req, res) => {
     if (req.session.loggedin) {
         res.redirect("/tissue?handle=" + req.session.handle);

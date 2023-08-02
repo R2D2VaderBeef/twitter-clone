@@ -36,5 +36,17 @@ module.exports = {
                 }
             );
         });
+    },
+    setUserBio: (handle, newbio) => {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'UPDATE users SET bio = ? WHERE handle = ?;',
+                [newbio, handle],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else resolve("ok");
+                }
+            );
+        });
     }
 }

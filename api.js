@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, addNewUser, getUser } = require("./database.js");
+const { getAllUsers, addNewUser, getUser, setUserBio } = require("./database.js");
 const crypto = require('crypto'); 
 
 router.get('/user', (req, res) => {
@@ -21,7 +21,7 @@ router.get('/getAllUsers', (req, res) => {
 })
 
 router.post("/signup", (req, res) => {
-    let handle = req.body.handle;
+    let handle = req.body.handle.slice(0, 16);
     let password = req.body.password;
 
     let salt = crypto.randomBytes(16).toString('hex');
@@ -51,6 +51,32 @@ router.post("/login", (req, res) => {
                 res.send("success " + result[0].handle);
             }
         }
+    })
+})
+
+router.get("/getProfile", (req, res) => {
+    let handle = req.query.handle;
+    let self = handle == req.session.handle ? true : false;
+    let bio = "";
+
+    getUser(handle).then(result => {
+        if (!result[0]) {
+            res.send({"error": "nouser"})
+        }
+        else {
+            if (result[0].bio) bio = result[0].bio;
+            res.send({"handle": handle, "self": self, "bio": bio});
+        }
+    })
+})
+
+router.post("/setBio", (req, res) => {
+    let handle = req.session.handle;
+    let newbio = req.body.newbio.slice(0, 200);
+    newbio = newbio.replaceAll("<", "").replaceAll(">", "");
+
+    setUserBio(handle, newbio).then(result => {
+        res.send("success");
     })
 })
 
