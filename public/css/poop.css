@@ -1,0 +1,64 @@
+.poop {
+    border-radius: 10px;
+    background-color: #e0d7ce;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.poop p:not(.poopcontent),
+.poop h2 {
+    margin: 0;
+}
+
+.poophandle {
+    font-weight: 600;
+}
+
+.poop a {
+    text-decoration: none;
+}
+
+.poopcontent {
+    margin-top: 0.8em;
+    margin-bottom: 0;
+    padding: 0.5em;
+    background-color: #debeab
+}
+
+.originalPoop {
+    border: 2px dotted saddlebrown;
+    border-radius: 10px;
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
+.poopActions {
+    margin-top: 0.5em;
+}
+
+.poopActions button {
+    border-radius: 5px;
+    padding: 0.25em 0.5em;
+    transition-duration: 0.1s;
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    background-color: #749b03;
+    border: 1px solid white;
+}
+
+.poopIcon {
+    float: left;
+    padding-right: 0.5em;
+}
+
+.poopActions button:hover {
+    background-color: #060599;
+}
+
+.sniffCounter {
+    color: linen;
+    padding-left: 0.5em;
+}

@@ -68,5 +68,41 @@ module.exports = {
                 }
             );
         });
+    },
+    getPoop: (id) => {
+        return new Promise((resolve, reject) => {
+            connection.execute(
+                'SELECT * FROM posts WHERE id = ?;',
+                [id],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else resolve(results);
+                }
+            );
+        });
+    },
+    likePoop: (id, handle) => {
+        return new Promise((resolve, reject) => {
+            connection.execute(
+                'SELECT * FROM posts WHERE id = ?;',
+                [id],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else {
+                        let newLikes = results[0].likes ? [...results[0].likes] : [];
+                        newLikes.push(handle);
+                        let newNum = newLikes.length;
+                        connection.execute(
+                            'UPDATE posts SET likes = ? WHERE id = ?;',
+                            [newLikes, id],
+                            function(err, results, fields) {
+                                if (err) reject(err);
+                                else resolve(newNum);
+                            }
+                        );
+                    }
+                }
+            );
+        });
     }
 }

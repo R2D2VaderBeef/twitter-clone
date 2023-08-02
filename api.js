@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, addNewUser, getUser, setUserBio, saveNewPoop } = require("./database.js");
+const { getAllUsers, addNewUser, getUser, setUserBio, saveNewPoop, getPoop, likePoop } = require("./database.js");
 const crypto = require('crypto'); 
 
 router.get('/user', (req, res) => {
@@ -21,7 +21,7 @@ router.get('/getAllUsers', (req, res) => {
 })
 
 router.post("/signup", (req, res) => {
-    let handle = req.body.handle.slice(0, 16);
+    let handle = req.body.handle.slice(0, 16).toLowerCase();
     let password = req.body.password;
 
     let salt = crypto.randomBytes(16).toString('hex');
@@ -90,6 +90,29 @@ router.post("/newPoop", (req, res) => {
 
     saveNewPoop(handle, poop, timestamp).then(result => {
         res.send("success " + result[0]["LAST_INSERT_ID()"].toString());
+    })
+})
+
+router.get("/getPoop", (req, res) => {
+    let id = req.query.id;
+
+    getPoop(id).then(result => {
+        if (!result[0]) {
+            res.send([{"error": "nopoop"}])
+        }
+        else {
+            res.send([result[0], {"handle": req.session.handle}]);
+        }
+    })
+})
+
+router.post("/likePoop", (req, res) => {
+    if (!req.session.loggedin) return res.status(401).send("login");
+    let id = req.body.id;
+    let handle = req.session.handle;
+
+    likePoop(id, handle).then(result => {
+        res.send("success " + result.toString());
     })
 })
 
