@@ -69,6 +69,30 @@ module.exports = {
             );
         });
     },
+    saveNewPoopWithAction: (handle, poop, timestamp, action, related_id) => {
+        return new Promise((resolve, reject) => {
+            let reply = false;
+            let repost = false;
+            if (action == "fartback") reply = true;
+            else repost = true;
+            connection.execute(
+                'INSERT INTO posts (handle, content, timestamp, reply, repost, related_id) VALUES (?, ?, ?, ?, ?, ?)',
+                [handle, poop, timestamp, reply, repost, parseInt(related_id)],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else {
+                        connection.execute(
+                            `SELECT LAST_INSERT_ID()`,
+                            function (err2, results2, fields2) {
+                                if (err2) reject(err2);
+                                else resolve(results2);
+                            }
+                        )
+                    }
+                }
+            );
+        });
+    },
     getPoop: (id) => {
         return new Promise((resolve, reject) => {
             connection.execute(
@@ -101,6 +125,20 @@ module.exports = {
                             }
                         );
                     }
+                }
+            );
+        });
+    },
+    getRecentPoops: (number, page) => {
+        return new Promise((resolve, reject) => {
+            let offset = 0;
+            if (page > 1) offset = (page - 1) * number;
+            connection.execute(
+                'SELECT * FROM posts ORDER BY timestamp DESC LIMIT ? OFFSET ?;',
+                [number, offset],
+                function(err, results, fields) {
+                    if (err) reject(err);
+                    else resolve(results);
                 }
             );
         });

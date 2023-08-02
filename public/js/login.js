@@ -24,7 +24,7 @@ async function submitForm(event) {
     let resdata = await response.text();
     if (resdata.startsWith("success")) {
         document.getElementById("welcome").textContent = "Welcome back, " + resdata.slice(7) + ". Redirecting...";
-        setTimeout(function() {window.location.href = "/"}, 600);
+        setTimeout(function() {window.location.href = "/sewer"}, 600);
     }
     else if (resdata == "error nouser"){
         document.getElementById("error").textContent = "That account does not exist.";

@@ -88,6 +88,10 @@ app.get("/poops", (req, res) => {
     res.sendFile(process.cwd() + "/public/poopviewer.html");
 })
 
+app.get("/sewer", (req, res) => {
+    res.sendFile(process.cwd() + "/public/sewer.html");
+})
+
 app.use("/css", express.static(process.cwd() + "/public/css"));
 app.use("/fonts", express.static(process.cwd() + "/public/fonts"));
 app.use("/js", express.static(process.cwd() + "/public/js"));

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, addNewUser, getUser, setUserBio, saveNewPoop, getPoop, likePoop } = require("./database.js");
-const crypto = require('crypto'); 
+const { getAllUsers, addNewUser, getUser, setUserBio, saveNewPoop, getPoop, likePoop, saveNewPoopWithAction, getRecentPoops } = require("./database.js");
+const crypto = require('crypto');
 
 router.get('/user', (req, res) => {
     if (req.session.loggedin) {
@@ -37,7 +37,7 @@ router.post("/signup", (req, res) => {
 router.post("/login", (req, res) => {
     let handle = req.body.handle;
     let password = req.body.password;
-    
+
     getUser(handle).then(result => {
         if (!result[0]) {
             res.send("error nouser")
@@ -61,11 +61,11 @@ router.get("/getProfile", (req, res) => {
 
     getUser(handle).then(result => {
         if (!result[0]) {
-            res.send({"error": "nouser"})
+            res.send({ "error": "nouser" })
         }
         else {
             if (result[0].bio) bio = result[0].bio;
-            res.send({"handle": handle, "self": self, "bio": bio});
+            res.send({ "handle": handle, "self": self, "bio": bio });
         }
     })
 })
@@ -88,9 +88,16 @@ router.post("/newPoop", (req, res) => {
     poop = poop.replaceAll("<", "").replaceAll(">", "");
     let timestamp = Date.now();
 
-    saveNewPoop(handle, poop, timestamp).then(result => {
-        res.send("success " + result[0]["LAST_INSERT_ID()"].toString());
-    })
+    if (req.body.action == "poop") {
+        saveNewPoop(handle, poop, timestamp).then(result => {
+            res.send("success " + result[0]["LAST_INSERT_ID()"].toString());
+        })
+    }
+    else if (req.body.action == "fartback" || req.body.action == "smear") {
+        saveNewPoopWithAction(handle, poop, timestamp, req.body.action, req.body.related_id).then(result => {
+            res.send("success " + result[0]["LAST_INSERT_ID()"].toString());
+        })
+    }
 })
 
 router.get("/getPoop", (req, res) => {
@@ -98,10 +105,10 @@ router.get("/getPoop", (req, res) => {
 
     getPoop(id).then(result => {
         if (!result[0]) {
-            res.send([{"error": "nopoop"}])
+            res.send([{ "error": "nopoop" }])
         }
         else {
-            res.send([result[0], {"handle": req.session.handle}]);
+            res.send([result[0], { "handle": req.session.handle }]);
         }
     })
 })
@@ -114,6 +121,31 @@ router.post("/likePoop", (req, res) => {
     likePoop(id, handle).then(result => {
         res.send("success " + result.toString());
     })
+})
+
+router.get("/getPoopAuthor", (req, res) => {
+    let id = req.query.id;
+    getPoop(id).then(result => {
+        if (!result[0]) {
+            res.send("")
+        }
+        else {
+            res.send(result[0].handle);
+        }
+    })
+})
+
+router.get("/getSewerPosts", (req, res) => {
+    let number = parseInt(req.query.number);
+    let page = parseInt(req.query.page);
+
+    if (number > 0 && page > 0) {
+        getRecentPoops(number, page).then(result => {
+            result[number] = { "handle": req.session.handle }
+            res.send(result);
+        })
+    }
+    else res.end();
 })
 
 module.exports = router
