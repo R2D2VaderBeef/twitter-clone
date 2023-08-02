@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const api = require(process.cwd() + "/api.js");
+const db = require(process.cwd() + "/database.js");
 
 const http = require("http");
 const https = require("https");
@@ -43,6 +44,10 @@ app.use("/.well-known", express.static(process.cwd() + "/public/well-known"));
 
 app.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/public/index.html");
+})
+
+app.get("/signup", (req, res) => {
+    res.sendFile(process.cwd() + "/public/signup.html");
 })
 
 app.use("/css", express.static(process.cwd() + "/public/css"));

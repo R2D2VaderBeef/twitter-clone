@@ -61,7 +61,11 @@ nav button {
 }
 
 nav button:hover {
-    background-color: #060599
+    background-color: #060599;
+}
+
+.active {
+    background-color: #060599;
 }
 
 button .icon, button .fas {
@@ -109,4 +113,8 @@ button .icon, button .fas {
 .account button {
     margin-bottom: 0;
     background-color: #749b03;
+}
+
+p, ul, label {
+    font-size: 1.2rem;
 }

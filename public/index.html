@@ -9,25 +9,19 @@
         <script src="./js/main.js"></script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <style>
-            p, ul {
-                font-size: 1.2rem;
-            }
-        </style>
     </head>
     <body>
         <div class="wrapper">
             <div class="sidebar">
                 <nav>
-                    <button><span class="icon">🏠</span>Home</button>
+                    <button class="active"><span class="icon">🏠</span>Home</button>
                     <button><span class="icon">🚽</span>The Sewer</button>
-                    <button id="createaccount" style="display: none;"><span class="icon">🤡</span>Sign Up</button>
+                    <button onclick="window.location.href='/signup'" id="createaccount" style="display: none;"><span class="icon">🤡</span>Sign Up</button>
                     <button id="login" style="display: none;"><span class="icon">📥</span>Log In</button>
                     <button id="tissue" style="display: none;"><span class="icon">🤧</span>Your Tissue</button>
                     <button class="poopButton" id="poop" style="display: none;"><span class="icon">💩</span>Poop</button>
                     <div class="account" style="display: none;">
-                        <p class="handle">@invaderpoop</p>
+                        <p class="handle"></p>
                         <button id="logout"><span class="icon">📤</span>Log Out</button>
                     </div>
                 </nav>

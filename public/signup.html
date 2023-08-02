@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>💩 Sign Up | Buttwipe</title>
+
+        <link href="./css/main.css" rel="stylesheet" />
+        <link href="./css/fonts.css" rel="stylesheet" />
+        <link href="./css/account.css" rel="stylesheet" />
+
+        <script src="./js/main.js"></script>
+        <script src="./js/signup.js"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            p, ul {
+                font-size: 1.2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="sidebar">
+                <nav>
+                    <button onclick="window.location.href='/'"><span class="icon">🏠</span>Home</button>
+                    <button><span class="icon">🚽</span>The Sewer</button>
+                    <button id="createaccount" class="active" style="display: none;"><span class="icon">🤡</span>Sign Up</button>
+                    <button id="login" style="display: none;"><span class="icon">📥</span>Log In</button>
+                    <button id="tissue" style="display: none;"><span class="icon">🤧</span>Your Tissue</button>
+                    <button class="poopButton" id="poop" style="display: none;"><span class="icon">💩</span>Poop</button>
+                    <div class="account" style="display: none;">
+                        <p class="handle"></p>
+                        <button id="logout"><span class="icon">📤</span>Log Out</button>
+                    </div>
+                </nav>
+            </div>
+            <div class="feed">
+                <h1>🤡 Sign Up</h1>
+                <form id="signupform">
+                    <label for="newhandle">Choose your unique handle:</label><br/>
+                    <span style="font-size: 1.2rem">@</span><input type="text" name="newhandle" id="newhandle" maxlength="16" required style="width:220px"><br/>
+                    <span id="available" style="margin-bottom: 1em; display:inline-block;">❌ Enter a handle.</span><br/>
+                    <label for="password">Choose a strong password:</label><br/>
+                    <input type="password" name="password" id="password" required style="width:220px"><br/>
+                    <input type="submit" value="Sign Up">
+                    <p id="welcome" style="font-size: 1.2rem"></p>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
