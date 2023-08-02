@@ -1,0 +1,112 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: SaddleBrown;
+    margin: 0;
+}
+
+.sidebar {
+    float: left;
+    width: 30%;
+    box-sizing: border-box;
+    background-color: #749b03;
+    color: white;
+    border-radius: 10px;
+    height: 100%;
+    padding: 1.5em;
+}
+
+.feed {
+    float: left;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 1em 1.5em;
+}
+
+.wrapper {
+    width: 60%;
+    margin: auto;
+    background-color: Linen;
+    border-radius: 10px;
+    height: 100vh;
+}
+
+.wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    width: 80%;
+    margin: auto;
+}
+
+nav button {
+    border-radius: 5px;
+    padding: 0.25em;
+    width: 100%;
+    transition-duration: 0.1s;
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    margin-bottom: 1em;
+}
+
+nav button:hover {
+    background-color: #060599
+}
+
+button .icon, button .fas {
+    float: left;
+    padding-left: 0.5em;
+}
+
+.poopButton {
+    background-image: linear-gradient(to left, SaddleBrown , #060599);
+    z-index: 1;
+    position: relative;
+}
+
+.poopButton::before {
+    border-radius: 5px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, #ed7621 , #620269);
+    opacity: 0;
+    transition: 0.2s;
+    z-index: -1;
+  }
+  .poopButton:hover::before {
+    opacity: 1;
+  }
+
+.account {
+    border-radius: 5px;
+    background-color: #060599;
+    padding-top: 0.5em;
+}
+
+.account .handle {
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+}
+
+.account button {
+    margin-bottom: 0;
+    background-color: #749b03;
+}

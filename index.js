@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const api = require(process.cwd() + "/api.js");
 
 const http = require("http");
 const https = require("https");
@@ -43,3 +44,9 @@ app.use("/.well-known", express.static(process.cwd() + "/public/well-known"));
 app.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/public/index.html");
 })
+
+app.use("/css", express.static(process.cwd() + "/public/css"));
+app.use("/fonts", express.static(process.cwd() + "/public/fonts"));
+app.use("/js", express.static(process.cwd() + "/public/js"));
+app.use("/.well-known", express.static(process.cwd() + "/public/.well-known"));
+app.use("/api", api)
