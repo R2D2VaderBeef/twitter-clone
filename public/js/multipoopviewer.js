@@ -108,7 +108,7 @@ async function renderPoop(data, myhandle) {
     div.id = "poop" + data.id.toString();
     div.innerHTML = html;
 
-    document.getElementsByClassName("feed")[0].appendChild(div);
+    document.getElementById("feed-inset").appendChild(div);
 }
 
 let executing = false;
@@ -147,4 +147,27 @@ async function reply(id) {
 
 async function repost(id) {
     window.location.href="/poop?smear=" + id;
+}
+
+function nextPage() {
+    let array = window.location.search.slice(1).split("=")
+    let page = "1";
+    if (array[0] == "page") {
+        page = array[1];
+    }
+    pageInt = parseInt(page);
+    newPage = pageInt + 1;
+    window.location.href = "/sewer?page=" + newPage.toString();
+}
+
+function previousPage() {
+    let array = window.location.search.slice(1).split("=")
+    let page = "1";
+    if (array[0] == "page") {
+        page = array[1];
+    }
+    pageInt = parseInt(page);
+    newPage = pageInt - 1;
+    if (newPage < 1) return;
+    window.location.href = "/sewer?page=" + newPage.toString();
 }
