@@ -26,10 +26,9 @@ async function newPoop() {
     if (executing) return;
     executing = true;
 
-    let data = {poop: document.getElementById("poopcontent").value}
+    let data = {poop: document.getElementById("poopcontent").value, action: action}
 
     if (action != "poop") {
-        data.action = action;
         data.related_id = related_id;
     }
 
