@@ -40,7 +40,15 @@ if (process.env.PROD == "true") {
 
 app.use(session(sessionOptions));
 app.use(express.json());
-app.use("/.well-known", express.static(process.cwd() + "/public/well-known"));
+
+app.use(function (req, res, next) {
+    if (!req.secure && process.env.PROD == "TRUE") {
+        return res.redirect("https://" + req.headers.host + req.url);
+    }
+    next();
+});
+
+app.use("/.well-known", express.static(process.cwd() + "/public/.well-known"));
 
 app.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/public/index.html");
