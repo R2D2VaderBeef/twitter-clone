@@ -26,9 +26,11 @@ let httpsServer;
 if (process.env.PROD == "true") {
     const privateKey = fs.readFileSync(process.env.SSL_PRIVATEKEY_PATH, 'utf8');
     const certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH, 'utf8');
+    const ca = fs.readFileSync(process.env.SSL_CA_PATH, 'utf8');
     const credentials = {
         key: privateKey,
-        cert: certificate
+        cert: certificate,
+        ca: ca
     };
 
     httpsServer = https.createServer(app, credentials);
