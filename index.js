@@ -33,7 +33,7 @@ if (process.env.PROD == "true") {
         ca: ca
     };
 
-    httpsServer = https.createServer(app, credentials);
+    httpsServer = https.createServer(credentials, app);
     httpsServer.listen(443, () => {
         console.log("HTTPS server online")
     });
@@ -45,7 +45,7 @@ app.use(session(sessionOptions));
 app.use(express.json());
 
 app.use(function (req, res, next) {
-    if (!req.secure && process.env.PROD == "TRUE") {
+    if (!req.secure && process.env.PROD == "true") {
         return res.redirect("https://" + req.headers.host + req.url);
     }
     next();
